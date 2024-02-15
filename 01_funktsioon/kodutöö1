@@ -1,3 +1,4 @@
+/* Tipi arvutamine*/
 function tipHinnanguga(arveSuurus: number, tipProtsent: number): { tipSuurus: number, hinnang: string } {
   const tipSuurus = arveSuurus * (tipProtsent / 100);
   let hinnang = "";
