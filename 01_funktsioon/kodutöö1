@@ -1,0 +1,22 @@
+function tipHinnanguga(arveSuurus: number, tipProtsent: number): { tipSuurus: number, hinnang: string } {
+  const tipSuurus = arveSuurus * (tipProtsent / 100);
+  let hinnang = "";
+  if (tipProtsent < 10) {
+      hinnang = "kesine";
+  } else if (tipProtsent < 20) {
+      hinnang = "tavapärane";
+  } else if (tipProtsent < 30) {
+      hinnang = "hea";
+  } else {
+      hinnang = "väga hea";
+  }
+  return {
+      tipSuurus,
+      hinnang
+  };
+}
+
+const arve = 50; // Euro
+const tipProtsent = 10; // %
+const { tipSuurus, hinnang } = tipHinnanguga(arve, tipProtsent);
+console.log(`Tip on ${tipSuurus}, Hinnang tipile on ${hinnang}`);
