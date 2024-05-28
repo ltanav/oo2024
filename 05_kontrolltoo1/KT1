@@ -1,0 +1,48 @@
+class Aquarium {
+  private length: number;
+  private width: number;
+  private height: number;
+  private waterVolume: number;
+
+  constructor(length: number, width: number, height: number) {
+    this.length = length;
+    this.width = width;
+    this.height = height;
+    this.waterVolume = 0;
+  }
+
+  public getVolume(): number {
+    return this.length * this.width * this.height;
+  }
+
+  public addWater(amount: number): void {
+    const maxWaterVolume = this.getVolume() - 2 * 100; // leave 200 cm^3 of space
+    if (amount > maxWaterVolume) {
+      throw new Error('Cannot add more water than the maximum volume');
+    }
+    this.waterVolume += amount;
+  }
+
+  public getWaterVolume(): number {
+    return this.waterVolume;
+  }
+
+  public transferWater(otherAquarium: Aquarium, amount: number): void {
+    if (amount > this.waterVolume) {
+      throw new Error('Cannot transfer more water than the current volume');
+    }
+    if (otherAquarium.getWaterVolume() + amount > otherAquarium.getVolume() - 2 * 100) {
+      throw new Error('Cannot transfer water to another aquarium if it will exceed the maximum volume');
+    }
+    this.waterVolume -= amount;
+    otherAquarium.addWater(amount);
+  }
+}
+
+const myAquarium = new Aquarium(100, 30, 40);
+myAquarium.addWater(15);
+const otherAquarium = new Aquarium(50, 20, 30);
+myAquarium.transferWater(otherAquarium, 10);
+
+console.log(`My aquarium has ${myAquarium.getWaterVolume()} cm^3 of water`);
+console.log(`Other aquarium has ${otherAquarium.getWaterVolume()} cm^3 of water`);
