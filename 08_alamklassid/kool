@@ -1,16 +1,15 @@
 interface Person {
     name: string;
     register(): void;
+    readonly role: 'teacher' | 'student' | 'visitor';
 }
 
-// Define the Teacher, Student, and Visitor classes that implement the Person interface
 class Teacher implements Person {
     name: string;
-    readonly role: 'teacher';
+    readonly role = 'teacher';
 
     constructor(name: string) {
         this.name = name;
-        this.role = 'teacher';
     }
 
     register(): void {
@@ -20,11 +19,10 @@ class Teacher implements Person {
 
 class Student implements Person {
     name: string;
-    readonly role: 'student';
+    readonly role = 'student';
 
     constructor(name: string) {
         this.name = name;
-        this.role = 'student';
     }
 
     register(): void {
@@ -34,11 +32,10 @@ class Student implements Person {
 
 class Visitor implements Person {
     name: string;
-    readonly role: 'visitor';
+    readonly role = 'visitor';
 
     constructor(name: string) {
         this.name = name;
-        this.role = 'visitor';
     }
 
     register(): void {
@@ -82,11 +79,16 @@ class School {
     totalVisitors(): number {
         return this.visitors.length;
     }
+
+    countPeople(): number {
+        return this.teachers.length + this.students.length + this.visitors.length;
+    }
 }
 
 // Test
 const school = new School();
 
+// Register some people
 school.registerPerson(new Teacher('John Doe'));
 school.registerPerson(new Student('Jane Doe'));
 school.registerPerson(new Teacher('Jim Smith'));
@@ -94,7 +96,12 @@ school.registerPerson(new Student('Jill Smith'));
 school.registerPerson(new Visitor('Alice'));
 school.registerPerson(new Visitor('Bob'));
 
-console.log(`Total people in the school: ${school.totalPeople()}`);
+console.log(`Total people in the school: ${school.countPeople()}`);
 console.log(`Total students in the school: ${school.totalStudents()}`);
 console.log(`Total teachers in the school: ${school.totalTeachers()}`);
 console.log(`Total visitors in the school: ${school.totalVisitors()}`);
+
+//Total people in the school: 6
+Total students in the school: 2
+Total teachers in the school: 2
+Total visitors in the school: 2
