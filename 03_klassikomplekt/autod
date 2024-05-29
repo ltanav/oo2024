@@ -65,3 +65,9 @@ console.log(`${me.getName()}'s car is a ${me.getCar()?.getMake()} ${me.getCar()?
 me.driveToWork();
 you.driveToWork();
 friend.driveToWork();
+
+//
+John Doe's car is a Toyota Corolla (2020).
+John Doe is driving to work in their Toyota Corolla (2020).
+Jane Doe is driving to work in their Honda Civic (2018).
+Bob Smith is taking public transportation to work.
