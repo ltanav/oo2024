@@ -1,0 +1,37 @@
+interface StarConfig {
+  numTips: number;
+  innerRadius: number;
+  outerRadius: number;
+  x?: number;
+  y?: number;
+}
+
+function createStar(config: StarConfig) {
+  const { numTips, innerRadius, outerRadius, x = 0, y = 0 } = config;
+
+  const angle = (Math.PI * 2) / numTips;
+
+  const points: [number, number][] = [];
+
+  for (let i = 0; i < numTips; i++) {
+    const xPos = x + outerRadius * Math.cos(i * angle);
+    const yPos = y + outerRadius * Math.sin(i * angle);
+    points.push([xPos, yPos]);
+
+    const xInnerPos = x + innerRadius * Math.cos((i + 0.5) * angle);
+    const yInnerPos = y + innerRadius * Math.sin((i + 0.5) * angle);
+    points.push([xInnerPos, yInnerPos]);
+  }
+
+  // Draw the star using the points array
+  // ...
+}
+
+// Test
+const starConfig: StarConfig = {
+  numTips: 5,
+  innerRadius: 50,
+  outerRadius: 100,
+};
+
+createStar(starConfig);
