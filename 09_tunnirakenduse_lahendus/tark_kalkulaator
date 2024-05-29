@@ -1,0 +1,66 @@
+interface Calculator {
+  add(a: number, b: number): number;
+  subtract(a: number, b: number): number;
+  multiply(a: number, b: number): number;
+  divide(a: number, b: number): number;
+  squareRoot(a: number): number;
+  cubeRoot(a: number): number;
+}
+
+class AdvancedCalculator implements Calculator {
+  add(a: number, b: number): number {
+    return a + b;
+  }
+
+  subtract(a: number, b: number): number {
+    return a - b;
+  }
+
+  multiply(a: number, b: number): number {
+    return a * b;
+  }
+
+  divide(a: number, b: number): number {
+    if (b === 0) {
+      throw new Error('Cannot divide by zero');
+    }
+    return a / b;
+  }
+
+  squareRoot(a: number): number {
+    if (a < 0) {
+      throw new Error('Cannot calculate square root of negative number');
+    }
+    return Math.floor(Math.sqrt(a));
+  }
+
+  cubeRoot(a: number): number {
+    if (a < 0) {
+      throw new Error('Cannot calculate cube root of negative number');
+    }
+    let left = 0;
+    let right = a;
+    let ans = 0;
+    while (left <= right) {
+      let mid = left + (right - left) / 2;
+      if (mid * mid * mid === a) {
+        return mid;
+      } else if (mid * mid * mid < a) {
+        ans = mid;
+        left = mid + 1;
+      } else {
+        right = mid - 1;
+      }
+    }
+    return ans;
+  }
+}
+
+// Test
+const calculator = new AdvancedCalculator();
+console.log(calculator.add(2, 3)); // 5
+console.log(calculator.subtract(7, 4)); // 3
+console.log(calculator.multiply(3, 5)); // 15
+console.log(calculator.divide(10, 2)); // 5
+console.log(calculator.squareRoot(16)); // 4
+console.log(calculator.cubeRoot(27)); // 3
