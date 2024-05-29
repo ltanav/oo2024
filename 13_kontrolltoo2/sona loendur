@@ -1,4 +1,8 @@
-class CharacterCounter {
+interface CharacterCounterInterface {
+  countCharInWord(word: string): number;
+}
+
+class CharacterCounter implements CharacterCounterInterface {
   private char: string;
 
   constructor(char: string) {
@@ -16,11 +20,12 @@ class CharacterCounter {
   }
 }
 
-const aCounter = new CharacterCounter('a');
-const pCounter = new CharacterCounter('p');
-const eCounter = new CharacterCounter('e');
+// Tähtede loend
+const aCounter: CharacterCounterInterface = new CharacterCounter('a');
+const pCounter: CharacterCounterInterface = new CharacterCounter('p');
+const eCounter: CharacterCounterInterface = new CharacterCounter('e');
 
-// Test sõnaga  "pere"
+// Test sõnaga "pere"
 const word = "pere";
 console.log(`The occurrence of 'a' in '${word}' is: ${aCounter.countCharInWord(word)}`);
 console.log(`The occurrence of 'p' in '${word}' is: ${pCounter.countCharInWord(word)}`);
