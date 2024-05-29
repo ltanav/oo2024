@@ -1,0 +1,75 @@
+// book.ts
+interface Book {
+  title: string;
+  author: string;
+  read(): void;
+  addToCollection(collection: Book[]): void;
+}
+
+class Book implements Book {
+  title: string;
+  author: string;
+
+  constructor(title: string, author: string) {
+    this.title = title;
+    this.author = author;
+  }
+
+  read(): void {
+    console.log(`Read ${this.title} by ${this.author}`);
+  }
+
+  addToCollection(collection: Book[]): void {
+    collection.push(this);
+    console.log(`Added ${this.title} to the collection`);
+  }
+}
+
+// physical-book.ts
+class PhysicalBook extends Book {
+  pages: number;
+
+  constructor(title: string, author: string, pages: number) {
+    super(title, author);
+    this.pages = pages;
+  }
+
+  read(): void {
+    super.read();
+    console.log(`This book has ${this.pages} pages.`);
+  }
+}
+
+// e-book.ts
+class EBook extends Book {
+  format: string;
+
+  constructor(title: string, author: string, format: string) {
+    super(title, author);
+    this.format = format;
+  }
+
+  read(): void {
+    super.read();
+    console.log(`This book is in ${this.format} format.`);
+  }
+}
+
+// main.ts
+const library: Book[] = [];
+
+const physicalBook = new PhysicalBook('The Catcher in the Rye', 'J.D. Salinger', 277);
+const eBook = new EBook('Brave New World', 'Aldous Huxley', 'epub');
+
+physicalBook.addToCollection(library);
+eBook.addToCollection(library);
+
+physicalBook.read();
+eBook.read();
+
+//Added The Catcher in the Rye to the collection
+Added Brave New World to the collection
+Read The Catcher in the Rye by J.D. Salinger
+This book has 277 pages.
+Read Brave New World by Aldous Huxley
+This book is in epub format.
