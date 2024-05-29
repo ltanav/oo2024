@@ -23,8 +23,6 @@ function createStar(config: StarConfig) {
     points.push([xInnerPos, yInnerPos]);
   }
 
-  // Draw the star using the points array
-  // ...
 }
 
 // Test
