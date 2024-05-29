@@ -1,0 +1,32 @@
+import { Book } from './book';
+
+describe('Book', () => {
+  let book: Book;
+
+  beforeEach(() => {
+    book = new Book('The Catcher in the Rye', 'J.D. Salinger', 277);
+  });
+
+  it('has a title', () => {
+    expect(book.title).toEqual('The Catcher in the Rye');
+  });
+
+  it('has an author', () => {
+    expect(book.author).toEqual('J.D. Salinger');
+  });
+
+  it('has a page count', () => {
+    expect(book.pageCount).toEqual(277);
+  });
+
+  it('can be read', () => {
+    book.read();
+    expect(book.isRead).toBeTruthy();
+  });
+
+  it('can be added to a library', () => {
+    const library = { addBook: jest.fn() };
+    book.addToLibrary(library);
+    expect(library.addBook).toHaveBeenCalledWith(book);
+  });
+});
