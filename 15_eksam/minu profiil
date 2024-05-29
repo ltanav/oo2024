@@ -1,0 +1,4 @@
+Kasutaja autentimine: useAuthState hook kasutatakse, et saada kasutaja autentimise olek Firebase'ist.
+Profiili andmete hankimine: fetchProfileInfo funktsioon kasutatakse, et hankida kasutaja profiili andmed Firebase'ist.
+Profiili andmete uuendamine: handleUpdate funktsioon kasutatakse, et uuendada kasutaja profiili andmeid Firebase'is.
+Profiili andmete salvestamine: handleUpdates funktsioon kasutatakse, et salvestada kasutaja profiili andmeid Firebase'is.
