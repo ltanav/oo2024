@@ -1,0 +1,113 @@
+class Jook {
+  constructor(
+    public nimetus: string,
+    public liitriOmahind: number,
+    public erikaal: string = ""
+  ) {}
+}
+
+class Joogipudel {
+  constructor(
+    public maht: number,
+    public pudelitüüp: string,
+    public mass: number,
+    public taaraMaksumus: number,
+    public jook?: Jook
+  ) {}
+
+  get massKoosJoogiga(): number {
+    if (this.jook) {
+      return this.mass + this.jook.liitriOmahind;
+    } else {
+      return this.mass;
+    }
+  }
+}
+
+class Joogivaat {
+  constructor(public ruumala: number, private joogiKogus: number) {}
+
+  täitkeJoogipudel(joogipudel: Joogipudel): void {
+    if (this.joogiKogus >= joogipudel.maht) {
+      this.joogiKogus -= joogipudel.maht;
+      console.log(`Joogipudel täidetud. Jääv mass: ${this.joogiKogus}`);
+    } else {
+      console.log("Joogi puudub.");
+    }
+  }
+
+  tühjendaJoogipudelid(joogipudelid: Joogipudel[]): void {
+    for (const joogipudel of joogipudelid) {
+      if (joogipudel.massKoosJoogiga <= joogipudel.maht) {
+        this.joogiKogus += joogipudel.massKoosJoogiga;
+        joogipudel.mass = 0;
+        joogipudel.jook = undefined;
+      } else {
+        console.log("Joogi ei kattu.");
+      }
+    }
+  }
+
+  getJoogiKogus(): number {
+    return this.joogiKogus;
+  }
+
+  setJoogiKogus(value: number): void {
+    this.joogiKogus = value;
+  }
+}
+
+class JoogipudeliteKast {
+  constructor(
+    public kastitüüp: string,
+    public kastihind: number,
+    public kastimass: number,
+    public pesadeArv: number
+  ) {}
+
+  private joogipudelid: Joogipudel[] = [];
+
+  addJoogipudel(joogipudel: Joogipudel): void {
+    if (this.joogipudelid.length < this.pesadeArv) {
+      this.joogipudelid.push(joogipudel);
+    } else {
+      console.log("Kast on täis.");
+    }
+  }
+
+  getKastiMass(): number {
+    let mass = this.kastimass;
+    for (const joogipudel of this.joogipudelid) {
+      mass += joogipudel.massKoosJoogiga;
+    }
+    return mass;
+  }
+
+  getKastiOmahind(): number {
+    let omahind = this.kastihind;
+    for (const joogipudel of this.joogipudelid) {
+      omahind += joogipudel.taaraMaksumus;
+      if (joogipudel.jook) {
+        omahind += joogipudel.jook.liitriOmahind;
+      }
+    }
+    return omahind;
+  }
+
+  villiJoogivaadist(joogivaat: Joogivaat): void {
+    for (let i = 0; i < this.pesadeArv; i++) {
+      const joogipudel = new Joogipudel(1, "Small", 0.5, 0.2);
+      joogivaat.täitkeJoogipudel(joogipudel);
+      this.addJoogipudel(joogipudel);
+    }
+  }
+}
+
+// Automaattestid
+const jook = new Jook("Apple Juice", 2.5, "0%");
+const joogivaat = new Joogivaat(10, 5);
+const joogipudeliteKast = new JoogipudeliteKast("Small", 5, 2, 3);
+
+joogipudeliteKast.villiJoogivaadist(joogivaat);
+console.log(joogipudeliteKast.getKastiMass()); // 7.5
+console.log(joogipudeliteKast.getKastiOmahind()); // 12.
