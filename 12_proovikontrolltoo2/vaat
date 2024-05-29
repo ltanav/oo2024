@@ -1,0 +1,82 @@
+class Jook {
+  constructor(
+    public nimetus: string,
+    public liitriOmahind: number,
+    public erikaal: string = ""
+  ) {}
+}
+
+class Joogipudel {
+  constructor(
+    public maht: number,
+    public pudelitüüp: string,
+    public mass: number,
+    public taaraMaksumus: number,
+    public jook?: Jook
+  ) {}
+
+  get massKoosJoogiga(): number {
+    if (this.jook) {
+      return this.mass + this.jook.liitriOmahind;
+    } else {
+      return this.mass;
+    }
+  }
+}
+
+class Joogivaat {
+  constructor(public ruumala: number, private joogiKogus: number) {}
+
+  täitkeJoogipudel(joogipudel: Joogipudel): void {
+    if (this.joogiKogus >= joogipudel.maht) {
+      this.joogiKogus -= joogipudel.maht;
+      console.log(`Joogipudel täidetud. Jääv mass: ${this.joogiKogus}`);
+    } else {
+      console.log("Joogi puudub.");
+    }
+  }
+
+  tühjendaJoogipudelid(joogipudelid: Joogipudel[]): void {
+    for (const joogipudel of joogipudelid) {
+      if (joogipudel.massKoosJoogiga <= joogipudel.maht) {
+        this.joogiKogus += joogipudel.massKoosJoogiga;
+        joogipudel.mass = 0;
+        joogipudel.jook = undefined;
+      } else {
+        console.log("Joogi ei kattu.");
+      }
+    }
+  }
+
+  getJoogiKogus(): number {
+    return this.joogiKogus;
+  }
+
+  setJoogiKogus(value: number): void {
+    this.joogiKogus = value;
+  }
+}
+
+// Automaattestid
+const jook = new Jook("Apple Juice", 2.5, "0%");
+const joogipudel = new Joogipudel(1, "Small", 0.5, 0.2, jook);
+const joogipudel2 = new Joogipudel(1, "Small", 0.5, 0.2);
+const joogivaat = new Joogivaat(10, 5);
+
+joogivaat.täitkeJoogipudel(joogipudel);
+console.log(joogivaat.getJoogiKogus()); // 4.5
+
+joogivaat.täitkeJoogipudel(joogipudel2);
+console.log(joogivaat.getJoogiKogus()); // 4.5
+
+const joogipudelid = [
+  new Joogipudel(1, "Small", 0.5, 0.2, jook),
+  new Joogipudel(1, "Small", 0.5, 0.2, jook),
+  new Joogipudel(1, "Small", 0.5, 0.2, jook)
+];
+
+joogivaat.tühjendaJoogipudelid(joogipudelid);
+console.log(joogivaat.getJoogiKogus()); // 0
+
+console.log(joogipudel.massKoosJoogiga); // 0
+console.log(joogipudel2.massKoosJoogiga); // 0
