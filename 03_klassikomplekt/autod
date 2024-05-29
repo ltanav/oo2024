@@ -1,0 +1,67 @@
+class Car {
+  private make: string;
+  private model: string;
+  private year: number;
+
+  constructor(make: string, model: string, year: number) {
+    this.make = make;
+    this.model = model;
+    this.year = year;
+  }
+
+  public honk(): void {
+    console.log("Beep beep!");
+  }
+
+  public getMake(): string {
+    return this.make;
+  }
+
+  public getModel(): string {
+    return this.model;
+  }
+
+  public getYear(): number {
+    return this.year;
+  }
+}
+
+class Person {
+  private name: string;
+  private age: number;
+  private car: Car | null;
+
+  constructor(name: string, age: number, car: Car | null = null) {
+    this.name = name;
+    this.age = age;
+    this.car = car;
+  }
+
+  public driveToWork(): void {
+    if (this.car) {
+      console.log(`${this.name} is driving to work in their ${this.car.getMake()} ${this.car.getModel()} (${this.car.getYear()}).`);
+    } else {
+      console.log(`${this.name} is taking public transportation to work.`);
+    }
+  }
+
+  public getName(): string {
+    return this.name;
+  }
+
+  public getCar(): Car | null {
+    return this.car;
+  }
+}
+
+const myCar = new Car("Toyota", "Corolla", 2020);
+const yourCar = new Car("Honda", "Civic", 2018);
+
+const me = new Person("John Doe", 30, myCar);
+const you = new Person("Jane Doe", 28, yourCar);
+const friend = new Person("Bob Smith", 25);
+
+console.log(`${me.getName()}'s car is a ${me.getCar()?.getMake()} ${me.getCar()?.getModel()} (${me.getCar()?.getYear()}).`);
+me.driveToWork();
+you.driveToWork();
+friend.driveToWork();
