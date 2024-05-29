@@ -1,0 +1,100 @@
+interface Person {
+    name: string;
+    register(): void;
+}
+
+// Define the Teacher, Student, and Visitor classes that implement the Person interface
+class Teacher implements Person {
+    name: string;
+    readonly role: 'teacher';
+
+    constructor(name: string) {
+        this.name = name;
+        this.role = 'teacher';
+    }
+
+    register(): void {
+        console.log(`${this.name} (teacher) has registered.`);
+    }
+}
+
+class Student implements Person {
+    name: string;
+    readonly role: 'student';
+
+    constructor(name: string) {
+        this.name = name;
+        this.role = 'student';
+    }
+
+    register(): void {
+        console.log(`${this.name} (student) has registered.`);
+    }
+}
+
+class Visitor implements Person {
+    name: string;
+    readonly role: 'visitor';
+
+    constructor(name: string) {
+        this.name = name;
+        this.role = 'visitor';
+    }
+
+    register(): void {
+        console.log(`${this.name} (visitor) has registered.`);
+    }
+}
+
+class School {
+    teachers: Teacher[];
+    students: Student[];
+    visitors: Visitor[];
+
+    constructor() {
+        this.teachers = [];
+        this.students = [];
+        this.visitors = [];
+    }
+
+    registerPerson(person: Person): void {
+        if (person.role === 'teacher') {
+            this.teachers.push(person as Teacher);
+        } else if (person.role === 'student') {
+            this.students.push(person as Student);
+        } else if (person.role === 'visitor') {
+            this.visitors.push(person as Visitor);
+        }
+    }
+
+    totalPeople(): number {
+        return this.teachers.length + this.students.length + this.visitors.length;
+    }
+
+    totalStudents(): number {
+        return this.students.length;
+    }
+
+    totalTeachers(): number {
+        return this.teachers.length;
+    }
+
+    totalVisitors(): number {
+        return this.visitors.length;
+    }
+}
+
+// Test
+const school = new School();
+
+school.registerPerson(new Teacher('John Doe'));
+school.registerPerson(new Student('Jane Doe'));
+school.registerPerson(new Teacher('Jim Smith'));
+school.registerPerson(new Student('Jill Smith'));
+school.registerPerson(new Visitor('Alice'));
+school.registerPerson(new Visitor('Bob'));
+
+console.log(`Total people in the school: ${school.totalPeople()}`);
+console.log(`Total students in the school: ${school.totalStudents()}`);
+console.log(`Total teachers in the school: ${school.totalTeachers()}`);
+console.log(`Total visitors in the school: ${school.totalVisitors()}`);
