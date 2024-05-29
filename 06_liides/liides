@@ -1,0 +1,102 @@
+class ControlUnit {
+  engine: Engine;
+  brakes: Brakes;
+  wheels: Wheels;
+
+  constructor() {
+    this.engine = new Engine();
+    this.brakes = new Brakes();
+    this.wheels = new Wheels();
+  }
+
+  startEngine(): void {
+    this.engine.start();
+  }
+
+  stopEngine(): void {
+    this.engine.stop();
+  }
+
+  accelerate(amount: number): void {
+    this.engine.accelerate(amount); // accelerate by 10 meters per second squared
+  }
+
+  brake(amount: number): void {
+    this.brakes.applyBrakes(amount); // apply 500 newtons of braking force
+  }
+
+  turn(direction: string, angle: number): void {
+    this.wheels.turn(direction, angle); // turn 30 degrees to the left
+  }
+}
+
+class Engine {
+  isRunning: boolean;
+  speed: number;
+
+  constructor() {
+    this.isRunning = false;
+    this.speed = 0;
+  }
+
+  start(): void {
+    this.isRunning = true;
+  }
+
+  stop(): void {
+    this.isRunning = false;
+  }
+
+  accelerate(amount: number): void {
+    if (this.isRunning) {
+      this.speed += amount; // increase speed by 10 meters per second squared
+      console.log(`Accelerating to ${this.speed} meters per second`);
+    }
+  }
+}
+
+class Brakes {
+  currentForce: number;
+
+  constructor() {
+    this.currentForce = 0;
+  }
+
+  applyBrakes(force: number): void {
+    this.currentForce += force; // apply 500 newtons of braking force
+    console.log(`Applying ${this.currentForce} newtons of braking force`);
+  }
+}
+
+class Wheels {
+  direction: string;
+  angle: number;
+
+  constructor() {
+    this.direction = 'traight';
+    this.angle = 0;
+  }
+
+  turn(direction: string, angle: number): void {
+    this.direction = direction;
+    this.angle += angle; // turn 30 degrees to the left
+    console.log(`Turning ${this.angle} degrees to the ${this.direction}`);
+  }
+}
+
+const controlUnit = new ControlUnit();
+
+console.log('Start the engine:');
+controlUnit.startEngine();
+
+console.log('Accelerate:');
+controlUnit.accelerate(10); // accelerate by 10 meters per second squared
+
+console.log('Brake:');
+controlUnit.brake(500); // apply 500 newtons of braking force
+
+console.log('Turn left:');
+controlUnit.turn('left', 30); // turn 30 degrees to the left
+
+console.log('Stop the engine:');
+controlUnit.stopEngine();
