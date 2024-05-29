@@ -1,0 +1,45 @@
+interface ISõna {
+  countA(): number;
+}
+
+class Sõna implements ISõna {
+  private _sõna: string;
+
+  constructor(sõna: string) {
+    this._sõna = sõna;
+  }
+
+  countA(): number {
+    return this._sõna.split('').filter(char => char === 'a').length;
+  }
+}
+
+class Lause extends Array<Sõna> {
+  constructor(lause: string) {
+    super();
+    const words = lause.split(' ');
+    for (const word of words) {
+      this.push(new Sõna(word));
+    }
+  }
+
+  countWords(): number {
+    return this.length;
+  }
+
+  countAs(): number {
+    let count = 0;
+    for (const sõna of this) {
+      count += sõna.countA();
+    }
+    return count;
+  }
+}
+
+// test
+const lause = new Lause('minu pere ja muud loomad');
+console.log(`Number of words: ${lause.countWords()}`);
+console.log(`Number of 'a' characters: ${lause.countAs()}`);
+
+//Number of words: 5
+Number of 'a' characters: 2
