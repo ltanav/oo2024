@@ -21,6 +21,11 @@ class SelfDrivingCar {
   honk(): void {
     console.log('Beep beep!');
   }
+
+  brakeTime(distance: number, deceleration: number): number {
+    const time = (this.speed - 0) / deceleration;
+    return time * (distance / time);
+  }
 }
 
 const car1 = new SelfDrivingCar('red');
@@ -37,6 +42,12 @@ console.log(`Car 2 speed: ${car2.speed}`);
 
 car1.honk();
 car2.honk();
+
+const time1 = car1.brakeTime(50, 5);
+const time2 = car2.brakeTime(50, 5);
+
+console.log(`Car 1 braking time: ${time1} seconds.`);
+console.log(`Car 2 braking time: ${time2} seconds.`);
 
 car1.brake(10);
 car2.brake(20);
