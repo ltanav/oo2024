@@ -57,6 +57,23 @@ numberManager.addNumber(2);
 numberManager.addNumber(4);
 numberManager.addNumber(6);
 
+//Numbers: 2, 4, 6
+Arithmetic mean: 4
+4
+Numbers: 2, 4
+Moving average: 3
+Numbers: 4, 6
+Moving average: 5
+[ 3, 5 ]
+Numbers: 2, 4, 6
+Arithmetic mean: 4
+4
+Numbers: 2, 4
+Moving average: 3
+Numbers: 4, 6
+Moving average: 5
+[ 3, 5 ]
+
 const meanFromManager = numberManager.arithmeticMean();
 console.log(meanFromManager); 
 
