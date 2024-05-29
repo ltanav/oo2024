@@ -88,7 +88,6 @@ class School {
 // Test
 const school = new School();
 
-// Register some people
 school.registerPerson(new Teacher('John Doe'));
 school.registerPerson(new Student('Jane Doe'));
 school.registerPerson(new Teacher('Jim Smith'));
