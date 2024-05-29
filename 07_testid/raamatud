@@ -1,0 +1,86 @@
+interface Book {
+  title: string;
+  author: string;
+  read(): void;
+  addToCollection(collection: Book[]): void;
+}
+
+class PhysicalBook implements Book {
+  title: string;
+  author: string;
+  pages: number;
+  isRead: boolean;
+
+  constructor(title: string, author: string, pages: number) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.isRead = false;
+  }
+
+  read(): void {
+    this.isRead = true;
+    console.log(`Read ${this.title} by ${this.author}`);
+  }
+
+  addToCollection(collection: Book[]): void {
+    collection.push(this);
+    console.log(`Added ${this.title} to the collection`);
+  }
+}
+
+class EBook implements Book {
+  title: string;
+  author: string;
+  format: string;
+  isRead: boolean;
+
+  constructor(title: string, author: string, format: string) {
+    this.title = title;
+    this.author = author;
+    this.format = format;
+    this.isRead = false;
+  }
+
+  read(): void {
+    this.isRead = true;
+    console.log(`Read ${this.title} by ${this.author}`);
+  }
+
+  addToCollection(collection: Book[]): void {
+    collection.push(this);
+    console.log(`Added ${this.title} to the collection`);
+  }
+}
+
+class Library {
+  collection: Book[];
+
+  constructor() {
+    this.collection = [];
+  }
+
+  addBook(book: Book): void {
+    book.addToCollection(this.collection);
+  }
+
+  readBook(title: string): void {
+    let bookToRead = this.collection.find(book => book.title === title);
+    if (bookToRead) {
+      bookToRead.read();
+    } else {
+      console.log(`${title} not found in the collection`);
+    }
+  }
+}
+
+let library = new Library();
+
+let physicalBook = new PhysicalBook('The Catcher in the Rye', 'J.D. Salinger', 277);
+let eBook = new EBook('Brave New World', 'Aldous Huxley', 'epub');
+
+library.addBook(physicalBook);
+library.addBook(eBook);
+
+library.readBook('The Catcher in the Rye');
+library.readBook('Brave New World');
