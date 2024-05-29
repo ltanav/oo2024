@@ -1,0 +1,64 @@
+function arithmeticMean(a: number, b: number, c: number): number {
+  const result = (a + b + c) / 3;
+  console.log(`Numbers: ${a}, ${b}, ${c}`);
+  console.log(`Arithmetic mean: ${result}`);
+  return result;
+}
+
+function movingAverage(arr: number[]): number[] {
+  const result: number[] = [];
+  for (let i = 0; i < arr.length - 1; i++) {
+    const average = (arr[i] + arr[i + 1]) / 2;
+    console.log(`Numbers: ${arr[i]}, ${arr[i + 1]}`);
+    console.log(`Moving average: ${average}`);
+    result.push(average);
+  }
+  return result;
+}
+
+class NumberManager {
+  private arr: number[] = [];
+
+  addNumber(num: number): void {
+    this.arr.push(num);
+  }
+
+  movingAverage(): number[] {
+    const result: number[] = [];
+    for (let i = 0; i < this.arr.length - 1; i++) {
+      const average = (this.arr[i] + this.arr[i + 1]) / 2;
+      console.log(`Numbers: ${this.arr[i]}, ${this.arr[i + 1]}`);
+      console.log(`Moving average: ${average}`);
+      result.push(average);
+    }
+    return result;
+  }
+
+  arithmeticMean(): number {
+    if (this.arr.length < 3) {
+      console.log("Not enough numbers to calculate arithmetic mean.");
+      return NaN;
+    }
+    const result = (this.arr[0] + this.arr[1] + this.arr[2]) / 3;
+    console.log(`Numbers: ${this.arr[0]}, ${this.arr[1]}, ${this.arr[2]}`);
+    console.log(`Arithmetic mean: ${result}`);
+    return result;
+  }
+}
+
+const mean = arithmeticMean(2, 4, 6);
+console.log(mean); 
+
+const movingAverages = movingAverage([2, 4, 6]);
+console.log(movingAverages); 
+
+const numberManager = new NumberManager();
+numberManager.addNumber(2);
+numberManager.addNumber(4);
+numberManager.addNumber(6);
+
+const meanFromManager = numberManager.arithmeticMean();
+console.log(meanFromManager); 
+
+const movingAveragesFromManager = numberManager.movingAverage();
+console.log(movingAveragesFromManager); 
