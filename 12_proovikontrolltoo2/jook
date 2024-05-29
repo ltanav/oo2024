@@ -1,0 +1,49 @@
+// Klass Jook
+class Jook {
+  constructor(
+    public nimetus: string,
+    public liitriOmahind: number,
+    public erikaal: string = ""
+  ) {}
+}
+
+// Klass Joogipudel
+class Joogipudel {
+  constructor(
+    public maht: number,
+    public pudelitüüp: string,
+    public mass: number,
+    public taaraMaksumus: number,
+    public jook?: Jook
+  ) {}
+
+  // Käsklus Joogipudeli massi leidmiseks koos Joogiga
+  get massKoosJoogiga(): number {
+    if (this.jook) {
+      return this.mass + this.jook.liitriOmahind;
+    } else {
+      return this.mass;
+    }
+  }
+
+  // Käsklus komplekti omahinna leidmiseks
+  get komplektiOmahind(): number {
+    if (this.jook) {
+      return this.taaraMaksumus + this.jook.liitriOmahind;
+    } else {
+      return this.taaraMaksumus;
+    }
+  }
+}
+
+// Automaattestid
+const jook = new Jook("Apple Juice", 2.5, "0%");
+const joogipudel = new Joogipudel(1, "Small", 0.5, 0.2, jook);
+
+console.log(joogipudel.massKoosJoogiga); // 2.5 + 0.5 = 3
+console.log(joogipudel.komplektiOmahind); // 0.2 + 2.5 = 2.7
+
+const joogipudel2 = new Joogipudel(1, "Small", 0.5, 0.2);
+console.log(joogipudel2.massKoosJoogiga); // 0.5
+console.log(joogipudel2.komplektiOmahind); // 0.2
+
