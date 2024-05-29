@@ -1,0 +1,27 @@
+class CharacterCounter {
+  private char: string;
+
+  constructor(char: string) {
+    this.char = char;
+  }
+
+  countCharInWord(word: string): number {
+    let count = 0;
+    for (let i = 0; i < word.length; i++) {
+      if (word.charAt(i) === this.char) {
+        count += 1;
+      }
+    }
+    return count;
+  }
+}
+
+const aCounter = new CharacterCounter('a');
+const pCounter = new CharacterCounter('p');
+const eCounter = new CharacterCounter('e');
+
+// Test sõnaga  "pere"
+const word = "pere";
+console.log(`The occurrence of 'a' in '${word}' is: ${aCounter.countCharInWord(word)}`);
+console.log(`The occurrence of 'p' in '${word}' is: ${pCounter.countCharInWord(word)}`);
+console.log(`The occurrence of 'e' in '${word}' is: ${eCounter.countCharInWord(word)}`);
