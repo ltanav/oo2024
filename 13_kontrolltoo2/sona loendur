@@ -25,3 +25,7 @@ const word = "pere";
 console.log(`The occurrence of 'a' in '${word}' is: ${aCounter.countCharInWord(word)}`);
 console.log(`The occurrence of 'p' in '${word}' is: ${pCounter.countCharInWord(word)}`);
 console.log(`The occurrence of 'e' in '${word}' is: ${eCounter.countCharInWord(word)}`);
+
+//The occurrence of 'a' in 'pere' is: 0
+The occurrence of 'p' in 'pere' is: 1
+The occurrence of 'e' in 'pere' is: 2
